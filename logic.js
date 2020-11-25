@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 const connection = require("./db/connection");
-const db = require("./db/db");
+// const db = require("./db/db");
 const consoleTable = require("console.table");
 const employeeInput = [];
 
@@ -129,6 +129,7 @@ async function init(){
      {
           type:"list",
           message:"What is the employees role?",
+          name: "employeeRole",
           choices: [
                "Sales Lead",
                "Salesperson",
@@ -142,6 +143,7 @@ async function init(){
      {
           type:"list",
           message:"Who is the employees manager?",
+          name: "employeeManager",
           choices: [
                "John Doe",
                "Mike Chan",
@@ -152,7 +154,7 @@ async function init(){
           ],
      }]).then(answers => {
           console.log(answers);
-          let positionDetails = positions.find(obj => obj.title === answers.employee);
+          let role = role.find(obj => obj.title === answers.employee);
           let manager = managers.find(obj => obj.Manager === answers.manager);
           db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
           console.log(`${answers.firstName} was added to the employee database!`);
@@ -178,12 +180,13 @@ async function addRole() {
           message:"Select role department",
           name:"addEmployeeOptions",
      },
-]).then(answers => {
-     let depID = departments.find(obj => obj.name === answers.addEmployeeOptions).id
-     db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
-     console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
-     runApp();
+     ]).then(answers => {
+          let depID = departments.find(obj => obj.name === answers.addEmployeeOptions).id
+          db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
+          console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
+          addRole();
 
+     })
 };
 
 async function addDepartment() {
@@ -196,8 +199,8 @@ async function addDepartment() {
      ]).then(answers => {
           db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
           console.log(`${answers.departmentName} was added to departments.`);
-          init();
-      })
+          addDepartment();
+      });
 };
 
 

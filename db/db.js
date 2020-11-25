@@ -1,7 +1,7 @@
 const connection = require("./db/connection")
 
 class db {
-     constructor(connection) {
+     constructor(config) {
         this.connection = mysql.createConnection(config);
     }
 
