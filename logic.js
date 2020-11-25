@@ -12,7 +12,8 @@ async function init(){
              choices: [
              "View Employees", 
              "View All Employees by Department", 
-             "View All Employees by Manager", 
+             "View All Employees by Role",
+             "View All Emplyees by Manager",
              "Add Employee", 
              "Remove Employee", 
              "Update Employee Role", 
@@ -27,7 +28,10 @@ async function init(){
           case "View All Employees by Department":
                viewDepartment();
                break;
-          case "View All Employees by Manager":
+          case "View All Employees by Role":
+               viewRole();
+               break;
+          case "View All Employees by manager":
                viewManager();
                break;
           case "Add Employee":
@@ -47,30 +51,43 @@ async function init(){
  };
 
  async function viewEmployees() {
-     console.log("Selecting all employees...\n");
-     connection.query("SELECT * FROM employees", function(err, res) {
+     console.log("Selecting all employee...\n");
+     connection.query("SELECT * FROM employee", function(err, res) {
        if (err) throw err;
        // Log all results of the SELECT statement
-       console.log(res);
+       console.table(res);
        init();
      }
 )};
 
  async function viewDepartment() {
      console.log("Selecting all department...\n");
-     connection.query("SELECT * FROM departments", function(err, res) {
+     connection.query("SELECT * FROM department", function(err, res) {
        if (err) throw err;
        // Log all results of the SELECT statement
-       console.log(res);
+       console.table(res);
+       init();
      }
  )};
+
+ async function viewRole() {
+     console.log("Selecting all role...\n");
+     connection.query("SELECT * FROM role", function(err, res) {
+       if (err) throw err;
+       // Log all results of the SELECT statement
+       console.table(res);
+       init();
+     }
+)};
+
 
  async function viewManager() {
      console.log("Selecting all manager...\n");
      connection.query("SELECT * FROM manager", function(err, res) {
        if (err) throw err;
        // Log all results of the SELECT statement
-       console.log(res);
+       console.table(res);
+       init();
      }
 )};
 
