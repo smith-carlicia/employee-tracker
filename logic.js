@@ -1,8 +1,13 @@
 //Create a SELECT - DELETE - UPDATE - INSERT
 const inquirer = require("inquirer");
 const mysql = require("mysql");
-const connection = require("./db/connection")
+const connection = require("./db/connection");
+const db = require("./db/db");
 const consoleTable = require("console.table");
+const employeeInput = [];
+
+
+
 
 async function init(){
      inquirer.prompt({
@@ -15,6 +20,8 @@ async function init(){
              "View All Employees by Role",
              "View All Emplyees by Manager",
              "Add Employee", 
+             "Add Role",
+             "Add Department",
              "Remove Employee", 
              "Update Employee Role", 
              "Update Employee Manager"
@@ -37,6 +44,12 @@ async function init(){
           case "Add Employee":
                addEmployee();
                break;
+          case "Add Role":
+               addRole();
+               break;
+          case "Add Department":
+               addDepartment();
+               break;
           case "Remove Employee":
                removeEmployee();
                break;
@@ -49,6 +62,9 @@ async function init(){
           }
      });
  };
+
+
+
 
  async function viewEmployees() {
      console.log("Selecting all employee...\n");
@@ -91,8 +107,11 @@ async function init(){
      }
 )};
 
+
+
+
  async function addEmployee() {
-     inquirer.prompt({
+     inquirer.prompt([{
           type:"input",
           message:"What is the employee's id?",
           name:"addEmployeeOptions",
@@ -131,14 +150,56 @@ async function init(){
                "Malia Brown",
                "Sarah Lourd",
           ],
-     }).then(answers => {
+     }]).then(answers => {
           console.log(answers);
           let positionDetails = positions.find(obj => obj.title === answers.employee);
           let manager = managers.find(obj => obj.Manager === answers.manager);
           db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
           console.log(`${answers.firstName} was added to the employee database!`);
+          console.log(`${answers.lastName} was added to the employee database!`);
           addEmployee();
-});
+     })
+};
+
+async function addRole() {
+     inquirer.prompt([
+     {
+          type:"input",
+          message:"Add role.",
+          name:"roleInput",
+     },
+     {
+          type:"input",
+          message:"Add role salary",
+          name:"roleSalary",
+     },
+     {
+          type:"list",
+          message:"Select role department",
+          name:"addEmployeeOptions",
+     },
+]).then(answers => {
+     let depID = departments.find(obj => obj.name === answers.addEmployeeOptions).id
+     db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
+     console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
+     runApp();
+
+};
+
+async function addDepartment() {
+     inquirer.prompt([
+     {
+          type:"input",
+          message:"Enter department name.",
+          name:"departmentName",
+     }
+     ]).then(answers => {
+          db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
+          console.log(`${answers.departmentName} was added to departments.`);
+          init();
+      })
+};
+
 
  async function removeEmployee() {
      console.log("Deleting employee...\n");
@@ -153,6 +214,9 @@ async function init(){
      })
 };
 
+
+
+
 async function readEmployee() {
      console.log("Selecting all employee...\n");
      connection.query("SELECT * FROM employee", function(err, res) {
@@ -162,6 +226,9 @@ async function readEmployee() {
        removeEmployee();
      })
 };
+
+
+
 
  async function updateRole() {
      console.log("Selecting all role..\n");
@@ -179,37 +246,33 @@ async function updateManager() {
        // Log all results of the SELECT statement
        console.log(res);
      })
-}
+};
 
 init();
  //End Goal (Methods needed)
  //async function 
  //update method: 
- async function updateMethod(){
+//  async function updateMethod(){
      //create const that calls the findallMethod
-     const emplyeeAll = await db.findAllEmpMethod();
+     // const emplyeeAll = await db.findAllEmpMethod();
 
        //store the desired data in a reuseable "container"
-     const clientOptions = employees.map(({id, first_name ,last})=> ({
-         name: `${first_name} ${last}`,
-         value: id
-     }));
+     // const clientOptions = employees.map(({id, first_name ,last})=> ({
+     //     name: `${first_name} ${last}`,
+     //     value: id
+     // }));
 
      //employee update method
-     const {employeeID} = await prompt ([
-         {
-             type: "list",
-             name: "employeeId",
-             message: "which employee manager would you like to update? ",
-             choices: clientOptions
-         }
-     ])
+//      const {employeeID} = await prompt ([
+//          {
+//              type: "list",
+//              name: "employeeId",
+//              message: "which employee manager would you like to update? ",
+//              choices: clientOptions
+//          }
+//      ])
 
- }
+//  }
  //delete method:
 
  
-
-// class DB {
-//      constructor(connec)
-// }

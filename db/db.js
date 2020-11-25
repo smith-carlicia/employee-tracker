@@ -1,9 +1,29 @@
-class employeeDB {
-    constructor(id, first_name, last_name, role_id, manager_id) {
-        this.id = id;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.role_id = role_id;
-        this.manager_id = manager_id;
+const connection = require("./db/connection")
+
+class db {
+     constructor(connection) {
+        this.connection = mysql.createConnection(config);
     }
-}
+
+    query(sql, args) {
+        return new Promise((resolve, reject) => {
+            this.connection.query(sql, args, (err, rows) => {
+                if (err)
+                    return reject(err);
+                resolve(rows);
+            });
+        });
+    }
+
+    close() {
+        return new Promise((resolve, reject) => {
+            this.connection.end(err => {
+                if (err)
+                    return reject(err);
+                resolve();
+            });
+        });
+    }
+};
+
+module.exports = new db (connection);
