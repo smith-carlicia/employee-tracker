@@ -22,25 +22,25 @@ async function init(){
           console.log(init)
           switch(choices.options) {
           case "View Employees":
-               displayEmployees();
+               viewEmployees();
                break;
           case "View All Employees by Department":
-               displayEmployeesByDept();
+               viewDepartment();
                break;
           case "View All Employees by Manager":
-               displayEmployeesByManager();
+               viewManager();
                break;
           case "Add Employee":
-               addNewEmployee();
+               addEmployee();
                break;
           case "Remove Employee":
-               removeCurrentEmployee();
+               removeEmployee();
                break;
           case "Update Employee Role":
-               updateCurrentEmployeeRole();
+               updateRole();
                break;
           case "Update Manager Role":
-               updateCurrentManagerRole();
+               updateManager();
                break;
           }
      });
@@ -52,7 +52,7 @@ async function init(){
        if (err) throw err;
        // Log all results of the SELECT statement
        console.log(res);
-       connection.end();
+       init();
      }
 )};
 
@@ -157,6 +157,8 @@ async function updateManager() {
        console.log(res);
      })
 }
+
+init();
  //End Goal (Methods needed)
  //async function 
  //update method: 
