@@ -131,8 +131,14 @@ async function init(){
                "Malia Brown",
                "Sarah Lourd",
           ],
-     })
-};
+     }).then(answers => {
+          console.log(answers);
+          let positionDetails = positions.find(obj => obj.title === answers.employee);
+          let manager = managers.find(obj => obj.Manager === answers.manager);
+          db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
+          console.log(`${answers.firstName} was added to the employee database!`);
+          addEmployee();
+});
 
  async function removeEmployee() {
      console.log("Deleting employee...\n");
