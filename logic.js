@@ -179,9 +179,15 @@ async function addRole() {
           type:"list",
           message:"Select role department",
           name:"addEmployeeOptions",
+          choices: [
+               "Sales",
+               "Engineering",
+               "Finance",
+               "Legal",
+          ]
      },
      ]).then(answers => {
-          let depID = departments.find(obj => obj.name === answers.addEmployeeOptions).id
+          // let depID = department.find(obj => obj.name === answers.addEmployeeOptions).id
           db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
           console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
           addRole();
@@ -200,7 +206,11 @@ async function addDepartment() {
           db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
           console.log(`${answers.departmentName} was added to departments.`);
           addDepartment();
-      });
+     }).then(answers => {
+          db.query("INSERT INTO department (name) VALUES (?)", [answers.depName]);
+          console.log(`${answers.depName} was added to departments.`);
+          addDepartment();
+     })
 };
 
 
