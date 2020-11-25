@@ -132,7 +132,7 @@ async function init(){
                "Sarah Lourd",
           ],
      })
- }
+};
 
  async function removeEmployee() {
      console.log("Deleting employee...\n");
