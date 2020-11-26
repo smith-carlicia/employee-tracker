@@ -1,5 +1,6 @@
 const util = require("util");
-const mysql = require("mysql");
+const mysql = require("mysql2/promise");
+
 
 
 var connection = mysql.createConnection({
@@ -13,7 +14,10 @@ var connection = mysql.createConnection({
   
     // Your password
     password: "nschs0912",
-    database: "employeetracker_db"
+    database: "employeetracker_db",
+
+    // Promise
+    // Promise: "db",
   });
 
   connection.connect(function(err) {

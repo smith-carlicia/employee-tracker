@@ -1,6 +1,6 @@
 //Create a SELECT - DELETE - UPDATE - INSERT
 const inquirer = require("inquirer");
-const mysql = require("mysql");
+const mysql = require("mysql2/promise");
 const connection = require("./db/connection");
 // const db = require("./db/db");
 const consoleTable = require("console.table");
@@ -156,7 +156,12 @@ async function init(){
           console.log(answers);
           let role = role.find(obj => obj.title === answers.employee);
           let manager = managers.find(obj => obj.Manager === answers.manager);
-          db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
+          connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", function(err, results){
+               [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]
+               console.log(fields);
+               console.log(results);
+          });
+          // db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
           console.log(`${answers.firstName} was added to the employee database!`);
           console.log(`${answers.lastName} was added to the employee database!`);
           addEmployee();
