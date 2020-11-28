@@ -5,6 +5,7 @@ const figlet = require("figlet");
 const connection = require("./db/connection");
 const db = require("./db/index");
 const consoleTable = require("console.table");
+const { updateRole } = require("./db/index");
 const employeeInput = [];
 
 
@@ -16,7 +17,7 @@ figlet("Employee Manager", function (err, data) {
      }
      console.log(data);
      init();
-   });
+});
 
 async function init(){
      inquirer.prompt({
@@ -62,6 +63,8 @@ async function init(){
           case "Remove Employee":
                removeEmployee();
                break;
+          case "Update Role":
+               updateRole;
           case "Update Employee Role":
                updateRole();
                break;
@@ -76,42 +79,42 @@ async function init(){
 
 
  async function viewEmployees() {
-     console.log("Selecting all employee...\n");
+     // console.log("Selecting all employee...\n");
      // connection.query("SELECT * FROM employee", function(err, res) {
      //   if (err) throw err;
      //   // Log all results of the SELECT statement
-     //   console.table(res);
+       console.table(res);
      //   init();
      // })
 };
 
  async function viewDepartment() {
-     console.log("Selecting all department...\n");
+     // console.log("Selecting all department...\n");
      // connection.query("SELECT * FROM department", function(err, res) {
      //   if (err) throw err;
      //   // Log all results of the SELECT statement
-     //   console.table(res);
+       console.table(res);
      //   init();
      // })
 };
 
  async function viewRole() {
-     console.log("Selecting all role...\n");
+     // console.log("Selecting all role...\n");
      // connection.query("SELECT * FROM role", function(err, res) {
      //   if (err) throw err;
      //   // Log all results of the SELECT statement
-     //   console.table(res);
+       console.table(res);
      //   init();
      // })
 };
 
 
  async function viewManager() {
-     console.log("Selecting all manager...\n");
+     // console.log("Selecting all manager...\n");
      // connection.query("SELECT * FROM manager", function(err, res) {
      //   if (err) throw err;
      //   // Log all results of the SELECT statement
-     //   console.table(res);
+       console.table(res);
      //   init();
      // })
 };
@@ -157,6 +160,7 @@ async function init(){
           message:"Who is the employees manager?",
           name: "employeeManager",
           choices: [
+               {name:"employee manager from db", value:"manager id from db"},
                "John Doe",
                "Mike Chan",
                "Ashley Rodriguez",
@@ -173,107 +177,114 @@ async function init(){
      //           [[answers.employeeFirstName.trim(), answers.employeeLastName.trim(), positionDetails.id, manager.id]]
      //      );
      //      // db.query("INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", [[answers.firstName.trim(), answers.lastName.trim(), positionDetails.id, manager.id]]);
-     //      console.log(`${answers.firstName} was added to the employee database!`);
-     //      console.log(`${answers.lastName} was added to the employee database!`);
+          console.log(`${answers.firstName} was added to the employee database!`);
+          console.log(`${answers.lastName} was added to the employee database!`);
      //      addEmployee();
      // })
+     
 });
 
-async function addRole() {
+async function addRole(){
      inquirer.prompt([
-     {
-          type:"input",
-          message:"Add role.",
-          name:"roleInput",
-     },
-     {
-          type:"input",
-          message:"Add role salary",
-          name:"roleSalary",
-     },
-     {
-          type:"list",
-          message:"Select role department",
-          name:"addEmployeeOptions",
-          choices: [
-               "Sales",
-               "Engineering",
-               "Finance",
-               "Legal",
-          ]
-     },
-     ]).then(answers => {
+          {
+               type:"input",
+               message:"Add role.",
+               name:"roleInput",
+          },
+          {
+               type:"input",
+               message:"Add role salary",
+               name:"roleSalary",
+          },
+          {
+               type:"list",
+               message:"Select role department",
+               name:"addEmployeeOptions",
+               choices: [
+                    {name:"role department from db", value:"role id from db"},
+                    "Sales",
+                    "Engineering",
+                    "Finance",
+                    "Legal",
+               ]
+          },
+     ])}.then(answers => {
           // let depID = department.find(obj => obj.name === answers.addEmployeeOptions).id
      //      db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
-     //      console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
+          console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
      //      addRole();
 
      // })
-});
+     )};
 
-async function addDepartment() {
-     inquirer.prompt([
-     {
-          type:"input",
-          message:"Enter department name.",
-          name:"departmentName",
-     }
-     ]).then(answers => {
-          // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
-          console.log(`${answers.departmentName} was added to departments.`);
-          addDepartment();
-     })
-};
+// async function addDepartment() {
+//      inquirer.prompt([
+//      {
+//           type:"input",
+//           message:"Enter department name.",
+//           name:"departmentName",
+//      }
+//      ]).then(answers => {
+//           // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
+//           console.log(`${answers.departmentName} was added to departments.`);
+//           addDepartment();
+//      })
+// };
 
 
- async function removeEmployee() {
-     console.log("Deleting employee...\n");
-     // connection.query(
-     //   "DELETE FROM products WHERE ?",
+//  async function removeEmployee() {
+//      console.log("Deleting employee...\n");
+//      // connection.query(
+//      //   "DELETE FROM products WHERE ?",
       
-     //   function(err, res) {
-     //     if (err) throw err;
-     //     console.log(res.affectedRows + " employee deleted!\n");
-     //     // Call readProducts AFTER the DELETE completes
-     //     readEmployee();
-     // })
-};
+//      //   function(err, res) {
+//      //     if (err) throw err;
+//      //     console.log(res.affectedRows + " employee deleted!\n");
+//      //     // Call readProducts AFTER the DELETE completes
+//      //     readEmployee();
+//      // })
+// };
 
 
 
 
-async function readEmployee() {
-     console.log("Selecting all employee...\n");
-     // connection.query("SELECT * FROM employee", function(err, res) {
-     //   if (err) throw err;
-     //   // Log all results of the SELECT statement
-     //   console.log(res);
-     //   removeEmployee();
-     // })
-};
+// async function readEmployee() {
+//      console.log("Selecting all employee...\n");
+//      // connection.query("SELECT * FROM employee", function(err, res) {
+//      //   if (err) throw err;
+//      //   // Log all results of the SELECT statement
+//      //   console.log(res);
+//      //   removeEmployee();
+//      // })
+// };
 
 
 
 
- async function updateRole() {
-     console.log("Selecting all role..\n");
-     // connection.query("SELECT * FROM role", function(err, res) {
-     //   if (err) throw err;
-     //   // Log all results of the SELECT statement
-     //   console.log(res);
-     // })
-};
+//  async function updateRole() {
+//      console.log("Selecting all role..\n");
+//      const employeeRole = role.map(({id, title, salary, department_id})) =>
+//      ({
+//           name: `${title} ${salary} ${department_id}`,
+//           value: id
+//      });
+//      // connection.query("SELECT * FROM role", function(err, res) {
+//      //   if (err) throw err;
+//      //   // Log all results of the SELECT statement
+//      //   console.log(res);
+//      // })
+// };
 
-async function updateManager() {
-     console.log("Selecting all manager...\n");
-     // connection.query("SELECT * FROM manager", function(err, res) {
-     //   if (err) throw err;
-     //   // Log all results of the SELECT statement
-     //   console.log(res);
-     // })
-};
+// async function updateManager() {
+//      console.log("Selecting all manager...\n");
+//      // connection.query("SELECT * FROM manager", function(err, res) {
+//      //   if (err) throw err;
+//      //   // Log all results of the SELECT statement
+//      //   console.log(res);
+//      // })
+// };
 
-init();
+// init();
  //End Goal (Methods needed)
  //async function 
  //update method: 
