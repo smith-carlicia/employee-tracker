@@ -1,5 +1,5 @@
 const util = require("util");
-const mysql = require("mysql2/promise");
+const mysql = require("mysql");
 
 
 
