@@ -20,10 +20,8 @@ var connection = mysql.createConnection({
     // Promise: "db",
   });
 
-  connection.connect(function(err) {
-    if (err) throw err;
-  });
+  connection.connect();
 
   connection.query = util.promisify(connection.query);
 
-  module.exports = connection;
+  module.exports = new connection;

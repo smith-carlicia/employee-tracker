@@ -168,7 +168,7 @@ async function init(){
                "Malia Brown",
                "Sarah Lourd",
           ],
-     }]).then(answers => {
+     }]).then((answers) => {
           console.log(answers);
           // let role = role.find(obj => obj.title === answers.employee);
           // let manager = manager.find(obj => obj.Manager === answers.manager);
@@ -182,9 +182,10 @@ async function init(){
      //      addEmployee();
      // })
      
-});
+     })
+};
 
-async function addRole(){
+async function addRole() {
      inquirer.prompt([
           {
                type:"input",
@@ -208,55 +209,57 @@ async function addRole(){
                     "Legal",
                ]
           },
-     ])}.then(answers => {
+     ]).then((answers) => {
           // let depID = department.find(obj => obj.name === answers.addEmployeeOptions).id
      //      db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);
           console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
      //      addRole();
 
      // })
-     )};
+     
+          })
+     };
 
-// async function addDepartment() {
-//      inquirer.prompt([
-//      {
-//           type:"input",
-//           message:"Enter department name.",
-//           name:"departmentName",
-//      }
-//      ]).then(answers => {
-//           // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
-//           console.log(`${answers.departmentName} was added to departments.`);
-//           addDepartment();
-//      })
-// };
+async function addDepartment() {
+     inquirer.prompt([
+     {
+          type:"input",
+          message:"Enter department name.",
+          name:"departmentName",
+     }
+     ]).then(answers => {
+          // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
+          console.log(`${answers.departmentName} was added to departments.`);
+          addDepartment();
+     })
+};
 
 
-//  async function removeEmployee() {
-//      console.log("Deleting employee...\n");
-//      // connection.query(
-//      //   "DELETE FROM products WHERE ?",
+ async function removeEmployee() {
+     console.log("Deleting employee...\n");
+     // connection.query(
+     //   "DELETE FROM products WHERE ?",
       
-//      //   function(err, res) {
-//      //     if (err) throw err;
-//      //     console.log(res.affectedRows + " employee deleted!\n");
-//      //     // Call readProducts AFTER the DELETE completes
-//      //     readEmployee();
-//      // })
-// };
+     //   function(err, res) {
+     //     if (err) throw err;
+     //     console.log(res.affectedRows + " employee deleted!\n");
+     //     // Call readProducts AFTER the DELETE completes
+     //     readEmployee();
+     // })
+};
 
 
 
 
-// async function readEmployee() {
-//      console.log("Selecting all employee...\n");
-//      // connection.query("SELECT * FROM employee", function(err, res) {
-//      //   if (err) throw err;
-//      //   // Log all results of the SELECT statement
-//      //   console.log(res);
-//      //   removeEmployee();
-//      // })
-// };
+async function readEmployee() {
+     console.log("Selecting all employee...\n");
+     // connection.query("SELECT * FROM employee", function(err, res) {
+     //   if (err) throw err;
+     //   // Log all results of the SELECT statement
+     //   console.log(res);
+     //   removeEmployee();
+     // })
+};
 
 
 
@@ -275,16 +278,16 @@ async function addRole(){
 //      // })
 // };
 
-// async function updateManager() {
-//      console.log("Selecting all manager...\n");
-//      // connection.query("SELECT * FROM manager", function(err, res) {
-//      //   if (err) throw err;
-//      //   // Log all results of the SELECT statement
-//      //   console.log(res);
-//      // })
-// };
+async function updateManager() {
+     console.log("Selecting all manager...\n");
+     // connection.query("SELECT * FROM manager", function(err, res) {
+     //   if (err) throw err;
+     //   // Log all results of the SELECT statement
+     //   console.log(res);
+     // })
+};
 
-// init();
+init();
  //End Goal (Methods needed)
  //async function 
  //update method: 
