@@ -24,10 +24,10 @@ CREATE TABLE employee (
     FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
 
--- CREATE TABLE manager (
---     id INT PRIMARY KEY AUTO_INCREMENT,
---     first_name VARCHAR(30) NOT NULL,
---     last_name VARCHAR(30) NOT NULL,
---     FOREIGN KEY (role_id) REFERENCES role(id)
---     FOREIGN KEY role(manager_id) REFERENCES department(id)
--- );
+CREATE TABLE manager (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES role(id)
+    FOREIGN KEY role(manager_id) REFERENCES department(id)
+);

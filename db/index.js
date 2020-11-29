@@ -12,8 +12,8 @@ class db {
             if (err) throw err;
             // Log all results of the SELECT statement
             console.table(res);
-            init();
-          })
+        })
+        init();
     };
 
     viewDepartment() {
@@ -23,8 +23,8 @@ class db {
             if (err) throw err;
             // Log all results of the SELECT statement
             console.table(res);
-            init();
-          })
+        })
+        init();
     };
  
     viewRole(role) {
@@ -34,8 +34,8 @@ class db {
             if (err) throw err;
             // Log all results of the SELECT statement
             console.table(res);
-            init();
-          })
+        })
+        init();
     };
 
     viewManager() {
@@ -45,8 +45,8 @@ class db {
             if (err) throw err;
             // Log all results of the SELECT statement
             console.table(res);
-            init();
-          })
+        })
+        init();
     };
  
     addEmployee(employee) {
@@ -100,5 +100,6 @@ class db {
     };
 
 };
+
 
 module.exports = new db (connection);
