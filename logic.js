@@ -262,23 +262,56 @@ async function readEmployee() {
 };
 
 
+ async function updateMethod(){
 
+     const emplyeeAll = await db.findAllEmpMethod();
 
-//  async function updateRole() {
-//      console.log("Selecting all role..\n");
-//      const employeeRole = role.map(({id, title, salary, department_id})) =>
-//      ({
-//           name: `${title} ${salary} ${department_id}`,
-//           value: id
-//      });
-//      // connection.query("SELECT * FROM role", function(err, res) {
-//      //   if (err) throw err;
-//      //   // Log all results of the SELECT statement
-//      //   console.log(res);
-//      // })
-// };
+     const clientOptions = employees.map(({id, first_name ,last})=> ({
+         name: `${first_name} ${last}`,
+         value: id
+     }));
+};
+async function updateEmployee () {
+     const {employeeId} = await prompt ([
+          {
+               type: "list",
+               name: "employeeId",
+               message: "Which employee manager would you like to update? ",
+               choices: clientOptions
+          }
+     ])
+};
+ async function updateRole() {
+      const {roleId} = await prompt ([
+          {
+               type: "list",
+               name: "roleId",
+               message: "Which employee role would you like to update? ",
+               choices: clientOptions
+          }
+      ])
+     // console.log("Selecting all role..\n");
+     // const employeeRole = role.map(({id, title, salary, department_id})) =>
+     // ({
+     //      name: `${title} ${salary} ${department_id}`,
+     //      value: id
+     // });
+     // connection.query("SELECT * FROM role", function(err, res) {
+     //   if (err) throw err;
+     //   // Log all results of the SELECT statement
+     //   console.log(res);
+     // })
+};
 
 async function updateManager() {
+     const {managerId} = await prompt ([
+          {
+               type: "list",
+               name: "managerId",
+               message: "Which employee manager would you like to update? ",
+               choices: clientOptions 
+          }
+     ])
      console.log("Selecting all manager...\n");
      // connection.query("SELECT * FROM manager", function(err, res) {
      //   if (err) throw err;
@@ -286,6 +319,7 @@ async function updateManager() {
      //   console.log(res);
      // })
 };
+
 
 init();
  //End Goal (Methods needed)
