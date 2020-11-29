@@ -80,21 +80,21 @@ async function init(){
      //   // Log all results of the SELECT statement
      // //   console.table(choices);
 
-     db.viewEmployees();
-     // init();
+     await db.viewEmployees();
+     init();
 };
 
 // Async functions to view data
  async function viewDepartment() {
      // console.log("Selecting all department...\n");
      //   console.table(choices);
-     db.viewDepartment();
+     await db.viewDepartment();
 };
 
  async function viewRole() {
      // console.log("Selecting all role...\n");
      //   console.table(choices);
-     db.viewRole();
+     await db.viewRole();
 };
 
 

@@ -13,7 +13,6 @@ class db {
             // Log all results of the SELECT statement
             console.table(res);
         })
-        init();
     };
 
     viewDepartment() {
