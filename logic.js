@@ -208,7 +208,7 @@ async function addRole() {
                     "Finance",
                     "Legal",
                ]
-          },
+          }
      ]).then((answers) => {
           // let depID = department.find(obj => obj.name === answers.addEmployeeOptions).id
      //      db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", [[answers.roleInput, answers.roleSalary, depID]]);

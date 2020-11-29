@@ -24,4 +24,4 @@ var connection = mysql.createConnection({
 
   connection.query = util.promisify(connection.query);
 
-  module.exports = new connection;
+  module.exports = connection;
