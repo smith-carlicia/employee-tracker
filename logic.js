@@ -1,11 +1,8 @@
 //Create a SELECT - DELETE - UPDATE - INSERT
 const inquirer = require("inquirer");
-const mysql = require("mysql");
 const figlet = require("figlet");
-const connection = require("./db/connection");
 const db = require("./db/index");
 const consoleTable = require("console.table");
-const { updateRole } = require("./db/index");
 const employeeInput = [];
 
 

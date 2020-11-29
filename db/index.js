@@ -2,7 +2,7 @@ const connection = require("./connection")
 
 class db {
      constructor(connection) {
-        this.connection = mysql.createConnection(connection);
+        this.connection = connection;
     }
     
     viewEmployees() {
