@@ -13,7 +13,7 @@ figlet("Employee Manager", function (err, data) {
        return;
      }
      console.log(data);
-     init();
+     // init();
 });
 
 async function init(){
@@ -34,7 +34,7 @@ async function init(){
              "Update Employee Manager"
           ]
      }).then((choices) => {
-          console.log(init)
+          console.log(choices);
           switch(choices.options) {
           case "View Employees":
                viewEmployees();
@@ -89,12 +89,14 @@ async function init(){
      // console.log("Selecting all department...\n");
      //   console.table(choices);
      await db.viewDepartment();
+     init();
 };
 
  async function viewRole() {
      // console.log("Selecting all role...\n");
      //   console.table(choices);
      await db.viewRole();
+     init();
 };
 
 
@@ -103,6 +105,7 @@ async function init(){
      //   // Log all results of the SELECT statement
      //   console.table(choices);
      db.viewManager();
+     init();
 };
 
 

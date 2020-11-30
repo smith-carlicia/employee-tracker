@@ -23,7 +23,7 @@ class db {
             // Log all results of the SELECT statement
             console.table(res);
         })
-        init();
+        // init();
     };
  
     viewRole(role) {
@@ -34,7 +34,7 @@ class db {
             // Log all results of the SELECT statement
             console.table(res);
         })
-        init();
+        // init();
     };
 
     viewManager() {
@@ -45,7 +45,7 @@ class db {
             // Log all results of the SELECT statement
             console.table(res);
         })
-        init();
+        // init();
     };
  
     addEmployee(employee) {
