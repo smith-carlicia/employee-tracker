@@ -53,7 +53,7 @@ class db {
 
             "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)",
             employee,
-            [[employeeFirstName.trim(), employeeLastName.trim(), positionDetails.id, manager.id]]
+            [[employeeFirstName.trim(), employeeLastName.trim(), positionDetails.id, manager.id]],
         )
     };
   

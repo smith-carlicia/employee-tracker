@@ -117,22 +117,22 @@ async function init(){
      inquirer.prompt([{
           type:"input",
           message:"What is the employee's id?",
-          name:"employeeId",
+          name:"employeesId",
      },
      {
          type:"input",
          message:"What is the employees first name?",
-         name:"firstName", 
+         name:"employeesFirstName", 
      },
      {
           type:"input",
           message:"What is the employees last name?",
-          name: "lastName",
+          name: "employeesLastName",
      },
      {
           type:"list",
           message:"What is the employees role?",
-          name: "Role",
+          name: "employeesRole",
           choices: [
                {name:"role name from db", value:"role id from db"},
                "Sales Lead",
@@ -147,7 +147,7 @@ async function init(){
      {
           type:"list",
           message:"Who is the employees manager?",
-          name: "Manager",
+          name: "employeesManager",
           choices: [
                {name:"employee manager from db", value:"manager id from db"},
                "John Doe",
@@ -157,13 +157,13 @@ async function init(){
                "Malia Brown",
                "Sarah Lourd",
           ],
-     }]).then((choices) => {
+     }]).then(async(choices) => {
           console.table(choices);
-          console.log(`${choices.employeeId} was added to the employee database!`);
-          console.log(`${choices.firstName} was added to the employee database!`);
-          console.log(`${choices.lastName} was added to the employee database!`);
-          console.log(`${choices.Role} was added to the employee database!`);
-          console.log(`${choices.Manager} was added to the employee database!`);
+          console.log(`${choices.employeesId} was added to the employee database!`);
+          console.log(`${choices.employeesFirstName} was added to the employee database!`);
+          console.log(`${choices.employeesLastName} was added to the employee database!`);
+          console.log(`${choices.employeesRole} was added to the employee database!`);
+          console.log(`${choices.employeesManager} was added to the employee database!`);
          await (db.addEmployee());
      })
 };
@@ -183,7 +183,7 @@ async function addRole() {
           {
                type:"list",
                message:"Select role department",
-               name:"addEmployeeOptions",
+               name:"departmentOptions",
                choices: [
                     {name:"role department from db", value:"role id from db"},
                     "Sales",
@@ -192,9 +192,11 @@ async function addRole() {
                     "Legal",
                ]
           }
-     ]).then((answers) => {
+     ]).then(async(answers) => {
           console.log(answers);
-          console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
+          console.log(`${answers.roleInput} was added to the employee database!`);
+          console.log(`${answers.roleSalary} was added to the employee database!`);
+          console.log(`${answers.departmentOptions} was added to the employee database!`);
           db.addRole();
           })
      };
@@ -206,7 +208,7 @@ async function addDepartment() {
           message:"Enter department name.",
           name:"departmentName",
      }
-     ]).then(answers => {
+     ]).then(async(answers) => {
           console.log(answers);
           // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
           console.log(`${answers.departmentName} was added to departments.`);
