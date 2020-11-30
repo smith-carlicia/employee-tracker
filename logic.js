@@ -60,9 +60,9 @@ async function init(){
           case "Remove Employee":
                removeEmployee();
                break;
+          case "Update Employee":
+               updateEmployee();
           case "Update Role":
-               updateRole;
-          case "Update Employee Role":
                updateRole();
                break;
           case "Update Manager Role":
@@ -78,7 +78,7 @@ async function init(){
  async function viewEmployees() {
      // console.log("Selecting all employee...\n");
      //   // Log all results of the SELECT statement
-     // //   console.table(choices);
+       console.table(viewEmployees);
 
      await db.viewEmployees();
      init();
@@ -87,14 +87,14 @@ async function init(){
 // Async functions to view data
  async function viewDepartment() {
      // console.log("Selecting all department...\n");
-     //   console.table(choices);
+     console.table(viewDepartment);
      await db.viewDepartment();
      init();
 };
 
  async function viewRole() {
      // console.log("Selecting all role...\n");
-     //   console.table(choices);
+     console.table(viewRole);
      await db.viewRole();
      init();
 };
@@ -103,7 +103,7 @@ async function init(){
  async function viewManager() {
      // console.log("Selecting all manager...\n");
      //   // Log all results of the SELECT statement
-     //   console.table(choices);
+     console.table(viewManager);
      db.viewManager();
      init();
 };
@@ -157,12 +157,13 @@ async function init(){
                "Malia Brown",
                "Sarah Lourd",
           ],
-     }]).then((answers) => {
-          console.log(answers);
-        
-          console.log(`${answers.firstName} was added to the employee database!`);
-          console.log(`${answers.lastName} was added to the employee database!`);
-          db.addEmployee();
+     }]).then((choices) => {
+          console.table(choices);
+          console.log(`${first_name.firstName} was added to the employee database!`);
+          console.log(`${last_name.lastName} was added to the employee database!`);
+          console.log(`${role_id.roleId} was added to the employee database!`);
+          console.log(`${manager_id.managerId} was added to the employee database!`);
+         await(db.addEmployee());
      })
 };
 
@@ -191,6 +192,7 @@ async function addRole() {
                ]
           }
      ]).then((answers) => {
+          console.log(answers);
           console.log(`${answers.roleInput} was added. Department: ${answers.addEmployeeOptions}`);
           db.addRole();
           })
@@ -204,6 +206,7 @@ async function addDepartment() {
           name:"departmentName",
      }
      ]).then(answers => {
+          console.log(answers);
           // db.query("INSERT INTO department (name) VALUES (?)", [answers.departmentName]);
           console.log(`${answers.departmentName} was added to departments.`);
           db.addDepartment();
@@ -277,11 +280,6 @@ async function updateManager() {
           }
      ])
      console.log("Selecting all manager...\n");
-     // connection.query("SELECT * FROM manager", function(err, res) {
-     //   if (err) throw err;
-     //   // Log all results of the SELECT statement
-     //   console.log(res);
-     // })
 };
 
 

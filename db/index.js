@@ -50,15 +50,19 @@ class db {
  
     addEmployee(employee) {
         return db.query(
-            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)", employee,
-            [[answers.employeeFirstName.trim(), answers.employeeLastName.trim(), positionDetails.id, manager.id]]
+
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)",
+            employee,
+            [[employeeFirstName.trim(), employeeLastName.trim(), positionDetails.id, manager.id]]
         )
     };
   
     addRole(role) {
-        return db.query("INSERT INTO role (title, salary, department_id) VALUES (?)", role,
-        [[answers.roleInput, answers.roleSalary, depID]]);
-
+        return db.query(
+            
+        "INSERT INTO role (title, salary, department_id) VALUES (?)", role,
+        [[answers.roleInput, answers.roleSalary, depID]]
+        )
     };
 
     addDepartment(department) {
@@ -78,8 +82,8 @@ class db {
           })
     };
  
-    updateRole(roleId) {
-        return connection.query("SELECT * FROM role", roleId,
+    updateRole(roleId, employeeId) {
+        return connection.query("SELECT * FROM role", roleId, employeeId,
         
         function(err, res) {
             if (err) throw err;
@@ -88,8 +92,8 @@ class db {
           })
     };
  
-    updateManager(managerId) {
-        return connection.query("SELECT * FROM manager", managerId,
+    updateManager(managerId, employeeId) {
+        return connection.query("SELECT * FROM manager", managerId, employeeId,
         
         function(err, res) {
             if (err) throw err;
