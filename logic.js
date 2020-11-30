@@ -117,22 +117,22 @@ async function init(){
      inquirer.prompt([{
           type:"input",
           message:"What is the employee's id?",
-          name:"addEmployeeOptions",
+          name:"employeeId",
      },
      {
          type:"input",
          message:"What is the employees first name?",
-         name:"employeeFirstName", 
+         name:"firstName", 
      },
      {
           type:"input",
           message:"What is the employees last name?",
-          name: "employeeLastName",
+          name: "lastName",
      },
      {
           type:"list",
           message:"What is the employees role?",
-          name: "employeeRole",
+          name: "Role",
           choices: [
                {name:"role name from db", value:"role id from db"},
                "Sales Lead",
@@ -147,7 +147,7 @@ async function init(){
      {
           type:"list",
           message:"Who is the employees manager?",
-          name: "employeeManager",
+          name: "Manager",
           choices: [
                {name:"employee manager from db", value:"manager id from db"},
                "John Doe",
@@ -159,10 +159,11 @@ async function init(){
           ],
      }]).then((choices) => {
           console.table(choices);
-          console.log(`${first_name.firstName} was added to the employee database!`);
-          console.log(`${last_name.lastName} was added to the employee database!`);
-          console.log(`${role_id.roleId} was added to the employee database!`);
-          console.log(`${manager_id.managerId} was added to the employee database!`);
+          console.log(`${choices.employeeId} was added to the employee database!`);
+          console.log(`${choices.firstName} was added to the employee database!`);
+          console.log(`${choices.lastName} was added to the employee database!`);
+          console.log(`${choices.role} was added to the employee database!`);
+          console.log(`${choices.manager} was added to the employee database!`);
          await(db.addEmployee());
      })
 };
