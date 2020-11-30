@@ -162,9 +162,9 @@ async function init(){
           console.log(`${choices.employeeId} was added to the employee database!`);
           console.log(`${choices.firstName} was added to the employee database!`);
           console.log(`${choices.lastName} was added to the employee database!`);
-          console.log(`${choices.role} was added to the employee database!`);
-          console.log(`${choices.manager} was added to the employee database!`);
-         await(db.addEmployee());
+          console.log(`${choices.Role} was added to the employee database!`);
+          console.log(`${choices.Manager} was added to the employee database!`);
+         await (db.addEmployee());
      })
 };
 
