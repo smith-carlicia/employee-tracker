@@ -49,7 +49,7 @@ async function init(){
                viewManager();
                break;
           case "Add Employee":
-               addEmployee();
+               addEm();
                break;
           case "Add Role":
                addRole();
@@ -111,7 +111,7 @@ async function init(){
 
 
 
- async function addEmployee() {
+ async function addEm() {
      //  call db for roles, depts, employees
      // dynamically create choices arrays with name and value
      inquirer.prompt([{
@@ -148,23 +148,29 @@ async function init(){
           type:"list",
           message:"Who is the employees manager?",
           name: "employeesManager",
-          choices: [
-               {name:"employee manager from db", value:"manager id from db"},
-               "John Doe",
-               "Mike Chan",
-               "Ashley Rodriguez",
-               "Kevin Tupik",
-               "Malia Brown",
-               "Sarah Lourd",
-          ],
-     }]).then(async(choices) => {
+          choices: 
+              async ()=>{
+                    const employeeList = db.getEmployees()
+                    employeeList.map((employee)=>{
+                    return `${employee.first_name} ${employee.last_name}`
+               })}
+          // [
+          //      {name:"employee manager from db", value:"manager id from db"},
+          //      "John Doe",
+          //      "Mike Chan",
+          //      "Ashley Rodriguez",
+          //      "Kevin Tupik",
+          //      "Malia Brown",
+          //      "Sarah Lourd",
+          // ],
+     }]).then(async (choices) => {
+          await (db.addEmployee(choices));
           console.table(choices);
           console.log(`${choices.employeesId} was added to the employee database!`);
           console.log(`${choices.employeesFirstName} was added to the employee database!`);
-          console.log(`${choices.employeesLastName} was added to the employee database!`);
+          // console.log(`${choices.employeesLastName} was added to the employee database!`);
           console.log(`${choices.employeesRole} was added to the employee database!`);
           console.log(`${choices.employeesManager} was added to the employee database!`);
-         await (db.addEmployee());
      })
 };
 

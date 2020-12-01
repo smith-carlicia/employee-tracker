@@ -1,10 +1,19 @@
-const connection = require("./connection")
+const connection = require("./connection");
+const util  = require("util");
 
 class db {
      constructor(connection) {
         this.connection = connection;
     }
     
+    getEmployees() {
+        const query = util.promisify(connection.query).bind(connection)
+        query("SELECT * FROM employee").then((employees)=>{
+            console.log(typeof employees)
+            return employees
+        })
+    };
+
     viewEmployees() {
         return this.connection.query("SELECT * FROM employee", 
         
@@ -49,19 +58,22 @@ class db {
     };
  
     addEmployee(employee) {
-        return db.query(
+        console.log(employee);
+        return connection.query(
 
-            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?)",
-            employee,
-            [[employeeFirstName.trim(), employeeLastName.trim(), positionDetails.id, manager.id]],
+            "INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?)",
+            // employee,
+            [employee.employeesFirstName.trim(), employee.employeesLastName.trim(), 1, 1],
         )
+        // )
     };
   
     addRole(role) {
-        return db.query(
+        return connection.query(
             
-        "INSERT INTO role (title, salary, department_id) VALUES (?)", role,
-        [[answers.roleInput, answers.roleSalary, depID]]
+        "INSERT INTO role (title, salary, department_id) VALUES (?,?,?)", 
+        // role,
+        [[role.roleInput, role.roleSalary, depID]]
         )
     };
 
