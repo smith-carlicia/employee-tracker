@@ -58,7 +58,13 @@ async function init(){
                addDepartment();
                break;
           case "Remove Employee":
-               removeEmployee();
+               removeEmployeeId();
+               break;
+          case "Remove Role":
+               removeRole();
+               break;
+          case "Remove Department":
+               removeDepartment();
                break;
           case "Update Employee":
                updateEmployee();
@@ -223,11 +229,21 @@ async function addDepartment() {
 };
 
 
- async function removeEmployee() {
+ async function removeEmployeeId() {
      // console.log("Deleting employee...\n");
-          db.removeEmployee();
+          console.table(removeEmployeeId)
+          await db.removeEmployeeId();
 };
 
+async function removeRole() {
+     // console.log("Deleting employee...\n");
+          await db.removeRole();
+};
+
+async function removeDepartment() {
+     // console.log("Deleting employee...\n");
+          await db.removeDepartment();
+};
 
 
 

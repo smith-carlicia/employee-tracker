@@ -14,6 +14,8 @@ class db {
         })
     };
 
+
+
     viewEmployees() {
         return this.connection.query("SELECT * FROM employee", 
         
@@ -57,6 +59,8 @@ class db {
         // init();
     };
  
+
+
     addEmployee(employee) {
         console.log(employee);
         return connection.query(
@@ -81,19 +85,9 @@ class db {
         return db.query("INSERT INTO department (name) VALUES (?)", department,
          [answers.departmentName]);
     };
+
+
     
-    removeEmployee(employeeId) {
-        return connection.query(
-            "DELETE FROM products WHERE ?", employeeId,
-           
-            function(err, res) {
-              if (err) throw err;
-              console.log(res.affectedRows + " employee deleted!\n");
-              // Call readProducts AFTER the DELETE completes
-              readEmployee();
-          })
-    };
- 
     updateRole(roleId, employeeId) {
         return connection.query("SELECT * FROM role", roleId, employeeId,
         
@@ -112,6 +106,44 @@ class db {
             // Log all results of the SELECT statement
             console.log(res);
         })
+    };
+
+
+
+    removeEmployee(employeeId) {
+        return this.connection.query(
+            "DELETE FROM products WHERE ?", employeeId,
+           
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " employee deleted!\n");
+              // Call readProducts AFTER the DELETE completes
+              readEmployee();
+          })
+    };
+
+    removeRole(roleId) {
+        return this.connection.query(
+            "DELETE FROM products WHERE ?", roleId,
+           
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " employee deleted!\n");
+              // Call readProducts AFTER the DELETE completes
+              readEmployee();
+          })
+    };
+
+    removeDepartment(departmentId) {
+        return this.connection.query(
+            "DELETE FROM products WHERE ?", departmentId,
+           
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " employee deleted!\n");
+              // Call readProducts AFTER the DELETE completes
+              readEmployee();
+          })
     };
 
 };
